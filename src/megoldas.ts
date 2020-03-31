@@ -23,7 +23,7 @@ export default class Megoldas {
         for (const i of this._jarmuvek) {
             if (i.Idopont.getHours() != ora) {
                 ora = i.Idopont.getHours();
-                vizsgaltAutok.push(ora + "óra :" + i.Rendszam);
+                vizsgaltAutok.push(ora + " óra: " + i.Rendszam);
             }
         }
         return vizsgaltAutok;
@@ -43,6 +43,18 @@ export default class Megoldas {
             }
         }
         return rendszamKategoriak;
+    }
+
+    public LeghosszabbForgalommentes(): string {
+        let max = this._jarmuvek[1].Idopont.getTime() - this._jarmuvek[0].Idopont.getTime();
+        let maxindex = 0;
+        for (let i = 1; i < this._jarmuvek.length; i++) {
+            if (this._jarmuvek[i].Idopont.getTime() - this._jarmuvek[i - 1].Idopont.getTime() > max) {
+                max = this._jarmuvek[i].Idopont.getTime() - this._jarmuvek[i - 1].Idopont.getTime();
+                maxindex = i;
+            }
+        }
+        return this._jarmuvek[maxindex - 1].IdopontString + " - " + this._jarmuvek[maxindex].IdopontString;
     }
 
     constructor(file: string) {

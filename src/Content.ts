@@ -33,13 +33,15 @@ export default class Content {
         res.write(`2.feladat: ${megoldas.MunkaidoOraban()} órát dolgoztak\n`);
 
         res.write("3.feladat:\n");
-        megoldas.EllenorzottAutok().forEach((i) => res.write(i + "\n"));
+        megoldas.EllenorzottAutok().forEach((i) => res.write("\t" + i + "\n"));
 
         res.write("4.feladat:\n");
-        res.write(`Személyautó: ${megoldas.Kategoriak()[0]}`);
-        res.write(`Autóbusz: ${megoldas.Kategoriak()[1]}`);
-        res.write(`Kamion: ${megoldas.Kategoriak()[2]}`);
-        res.write(`Motor: ${megoldas.Kategoriak()[3]}`);
+        res.write(`\tSzemélyautó: ${megoldas.Kategoriak()[0]}\n`);
+        res.write(`\tAutóbusz: ${megoldas.Kategoriak()[1]}\n`);
+        res.write(`\tKamion: ${megoldas.Kategoriak()[2]}\n`);
+        res.write(`\tMotor: ${megoldas.Kategoriak()[3]}\n`);
+
+        res.write(`5.feladat: A leghosszabb forgalommentes időszak: ${megoldas.LeghosszabbForgalommentes()} \n`);
 
         // <---- Fejezd be a kódolást
 
