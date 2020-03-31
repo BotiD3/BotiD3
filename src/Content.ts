@@ -43,6 +43,14 @@ export default class Content {
 
         res.write(`5.feladat: A leghosszabb forgalommentes időszak: ${megoldas.LeghosszabbForgalommentes()} \n`);
 
+        const u = url.parse(req.url as string, true).query;
+        let rendszamInput: string = u.rendszamInput as string;
+        if (!rendszamInput || rendszamInput.length != 7) rendszamInput = "";
+        res.write("6.feladat: Adja meg a keresendő rendszámot (az ismeretlen karakterek helyére írjon *-ot): <input type='text' name='rendszamInput' style='width: 6em'>\n");
+        megoldas.KeresettRendszam(rendszamInput).forEach((rendszam) => res.write(`\t${rendszam}\n`));
+
+        megoldas.AllomanybaIr("vizsgalt.txt", megoldas.VizsgaltAutok());
+
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");

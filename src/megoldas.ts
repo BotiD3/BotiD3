@@ -57,6 +57,41 @@ export default class Megoldas {
         return this._jarmuvek[maxindex - 1].IdopontString + " - " + this._jarmuvek[maxindex].IdopontString;
     }
 
+    public KeresettRendszam(input: string): Array<string> {
+        const rendszamok: string[] = [];
+        for (const item of this._jarmuvek) {
+            let hasonlo = true;
+            for (let i = 0; i < item.Rendszam.length; i++) {
+                if (item.Rendszam[i] != input[i] && input[i] != "*") {
+                    hasonlo = false;
+                }
+            }
+            if (hasonlo) {
+                rendszamok.push(item.Rendszam);
+            }
+        }
+        return rendszamok;
+    }
+
+    public VizsgaltAutok(): Array<string> {
+        const vizsgalt: string[] = [];
+        vizsgalt.push(this._jarmuvek[0].EredetiFormatum);
+
+        let elteltido = 0;
+        for (let i = 1; i < this._jarmuvek.length; i++) {
+            elteltido += this._jarmuvek[i].Idopont.getTime() - this._jarmuvek[i - 1].Idopont.getTime();
+            if (elteltido >= 300000) {
+                vizsgalt.push(this._jarmuvek[i].EredetiFormatum);
+                elteltido -= 300000;
+            }
+        }
+        return vizsgalt;
+    }
+
+    public AllomanybaIr(fajlNev: string, kiirando: Array<string>): void {
+        fs.writeFileSync(fajlNev, kiirando.join("\r\n") + "\r\n");
+    }
+
     constructor(file: string) {
         fs.readFileSync(file)
             .toString()
