@@ -1,7 +1,7 @@
 {
     "name": "jedlik-typescript-vscode-template",
     "version": "1.0.0",
-    "description": "Jedlik project template for using TypeScript, Jest and Node.js in VS Code.",
+    "description": "erettsegi feladat megoldas 2013okt",
     "engines": {
         "node": "13.x"
     },
@@ -9,7 +9,7 @@
     "repository": {
         "private": true,
         "type": "git",
-        "url": "https://github.com/nitslaszlo/JedlikTsTemplate"
+        "url": "https://github.com/BotiD3/Erettsegi_KozutiEllenorzes"
     },
     "scripts": {
         "start": "node ./dist/App.js",
