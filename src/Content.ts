@@ -30,7 +30,7 @@ export default class Content {
 
         // Kezd a kódolást innen -->
         const megoldas = new Megoldas("jarmu.txt");
-        res.write("2.felassaddat:");
+        res.write(`2.feladat: ${megoldas.MunkaidoOraban()} órát dolgoztak`);
 
         // <---- Fejezd be a kódolást
 
