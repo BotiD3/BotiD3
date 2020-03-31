@@ -1,4 +1,4 @@
-﻿import fs from "fs";
+﻿import fs, { createWriteStream } from "fs";
 import http from "http";
 import url from "url";
 import Megoldas from "./megoldas";
@@ -30,7 +30,16 @@ export default class Content {
 
         // Kezd a kódolást innen -->
         const megoldas = new Megoldas("jarmu.txt");
-        res.write(`2.feladat: ${megoldas.MunkaidoOraban()} órát dolgoztak`);
+        res.write(`2.feladat: ${megoldas.MunkaidoOraban()} órát dolgoztak\n`);
+
+        res.write("3.feladat:\n");
+        megoldas.EllenorzottAutok().forEach((i) => res.write(i + "\n"));
+
+        res.write("4.feladat:\n");
+        res.write(`Személyautó: ${megoldas.Kategoriak()[0]}`);
+        res.write(`Autóbusz: ${megoldas.Kategoriak()[1]}`);
+        res.write(`Kamion: ${megoldas.Kategoriak()[2]}`);
+        res.write(`Motor: ${megoldas.Kategoriak()[3]}`);
 
         // <---- Fejezd be a kódolást
 

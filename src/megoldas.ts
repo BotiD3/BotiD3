@@ -1,5 +1,6 @@
 import fs from "fs";
 import Jarmu from "./jarmu";
+import { strict } from "assert";
 
 export default class Megoldas {
     private _jarmuvek: Jarmu[] = [];
@@ -14,6 +15,34 @@ export default class Megoldas {
             }
         }
         return vege - kezdes + 1;
+    }
+
+    public EllenorzottAutok(): Array<string> {
+        let ora = 0;
+        const vizsgaltAutok: string[] = [];
+        for (const i of this._jarmuvek) {
+            if (i.Idopont.getHours() != ora) {
+                ora = i.Idopont.getHours();
+                vizsgaltAutok.push(ora + "óra :" + i.Rendszam);
+            }
+        }
+        return vizsgaltAutok;
+    }
+
+    public Kategoriak(): Array<number> {
+        const rendszamKategoriak: number[] = [0, 0, 0, 0]; //0- személy, 1- B, 2- K, 3- M
+        for (const i of this._jarmuvek) {
+            if (i.Rendszam[0] == "B") {
+                rendszamKategoriak[1]++;
+            } else if (i.Rendszam[0] == "K") {
+                rendszamKategoriak[2]++;
+            } else if (i.Rendszam[0] == "M") {
+                rendszamKategoriak[3]++;
+            } else {
+                rendszamKategoriak[0]++;
+            }
+        }
+        return rendszamKategoriak;
     }
 
     constructor(file: string) {
